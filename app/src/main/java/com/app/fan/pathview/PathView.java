@@ -33,7 +33,8 @@ public class PathView extends View {
 
     private void init(Context context) {
         Log.d("path", "init");
-        mPaint.setColor(ContextCompat.getColor(context, R.color.colorPrimaryDark));
+        //设置画笔颜色
+        mPaint.setColor(ContextCompat.getColor(context, R.color.halfgray));
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeWidth(5.0f);
 
@@ -88,7 +89,7 @@ public class PathView extends View {
         pathX = event.getX();
         pathY = event.getY();
         mPath.moveTo(pathX, pathY);
-        isActionUp=true;
+        isActionUp = true;
         Log.d("path", "touchDown" + pathX + ":" + pathY);
     }
 
