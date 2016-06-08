@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RectF;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -19,6 +20,7 @@ public class PathView extends View {
     private float pathX;
     private float pathY;
     private Boolean isActionUp = false;
+    private OnFinishListener listener;
 
     public PathView(Context context) {
         super(context);
@@ -63,8 +65,10 @@ public class PathView extends View {
             case MotionEvent.ACTION_UP:
                 mPath.close();
                 mPaint.setStyle(Paint.Style.FILL);
-
-
+                RectF r = new RectF();
+                mPath.computeBounds(r, true);
+                if (listener != null)
+                    listener.onFinish(mPath,r);
                 break;
 
         }
@@ -93,5 +97,12 @@ public class PathView extends View {
         Log.d("path", "touchDown" + pathX + ":" + pathY);
     }
 
+    public void setOnFinishListener(OnFinishListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnFinishListener {
+        public void onFinish(Path p,RectF r);
+    }
 
 }

@@ -17,6 +17,9 @@
         android:clickable="true" />
 
     <com.app.fan.pathview.PathView
+        android:id="@+id/pview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+
 </RelativeLayout>
